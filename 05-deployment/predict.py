@@ -2,6 +2,7 @@ import pickle
 
 from flask import Flask
 from flask import request
+from flask import jsonify
 
 model_file = 'modelC=1.0.bin'
 
@@ -16,7 +17,14 @@ def predict():
     
     X = dv.transform([customer])
     y_pred = model.predict_proba(X)[0, 1]
-    return y_pred
+    churn = y_pred > 0.5
+    
+    result = {
+        'churn_probability': y_pred,
+        'churn': churn
+    }
+    
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=9696)
