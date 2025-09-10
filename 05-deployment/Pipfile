@@ -11,6 +11,7 @@ pandas = "*"
 scikit-learn = "*"
 
 [dev-packages]
+awsebcli = "*"
 
 [requires]
 python_version = "3.12.11"
